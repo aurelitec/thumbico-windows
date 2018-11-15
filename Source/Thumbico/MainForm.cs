@@ -16,9 +16,12 @@ namespace Thumbico
     public partial class MainForm : Form
     {
         private string thumbiconFileName;
-        private int thumbiconWidth = 256;
-        private int thumbiconHeight = 256;
+        //private int thumbiconWidth = 256;
+        //private int thumbiconHeight = 256;
+        private Size thumbiconSize = new Size(256, 256);
         private ThumbnailFlags thumbiconFlags;
+
+        private SizeForm sizeForm;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="MainForm"/> class.
@@ -31,16 +34,18 @@ namespace Thumbico
             // Required method for designer support
             this.InitializeComponent();
 
-            this.ImageResizeToFitMenuItem.Tag = ThumbnailFlags.ResizeToFit;
-            this.ImageBiggerSizeOkMenuItem.Tag = ThumbnailFlags.BiggerSizeOk;
-            this.ImageMemoryOnlyMenuItem.Tag = ThumbnailFlags.MemoryOnly;
-            this.ImageIconOnlyMenuItem.Tag = ThumbnailFlags.IconOnly;
-            this.ImageThumbnailOnlyMenuItem.Tag = ThumbnailFlags.ThumbnailOnly;
-            this.ImageInCacheOnlyMenuItem.Tag = ThumbnailFlags.InCacheOnly;
-            this.ImageCropToSquareMenuItem.Tag = ThumbnailFlags.CropToSquare;
-            this.ImageWideThumbnailsMenuItem.Tag = ThumbnailFlags.WideThumbnails;
-            this.ImageIconBackgroundMenuItem.Tag = ThumbnailFlags.IconBackground;
-            this.ImageScaleUpMenuItem.Tag = ThumbnailFlags.ScaleUp;
+            this.imageResizeToFitMenuItem.Tag = ThumbnailFlags.ResizeToFit;
+            this.imageBiggerSizeOkMenuItem.Tag = ThumbnailFlags.BiggerSizeOk;
+            this.imageMemoryOnlyMenuItem.Tag = ThumbnailFlags.MemoryOnly;
+            this.imageIconOnlyMenuItem.Tag = ThumbnailFlags.IconOnly;
+            this.imageThumbnailOnlyMenuItem.Tag = ThumbnailFlags.ThumbnailOnly;
+            this.imageInCacheOnlyMenuItem.Tag = ThumbnailFlags.InCacheOnly;
+            this.imageCropToSquareMenuItem.Tag = ThumbnailFlags.CropToSquare;
+            this.imageWideThumbnailsMenuItem.Tag = ThumbnailFlags.WideThumbnails;
+            this.imageIconBackgroundMenuItem.Tag = ThumbnailFlags.IconBackground;
+            this.imageScaleUpMenuItem.Tag = ThumbnailFlags.ScaleUp;
+
+            this.sizeForm = new SizeForm();
         }
 
         private string ThumbiconFileName
@@ -57,30 +62,16 @@ namespace Thumbico
             }
         }
 
-        private int ThumbiconWidth
+        private Size ThumbiconSize
         {
             get
             {
-                return this.thumbiconWidth;
+                return this.thumbiconSize;
             }
 
             set
             {
-                this.thumbiconWidth = value;
-                this.ReloadThumbicon();
-            }
-        }
-
-        private int ThumbiconHeight
-        {
-            get
-            {
-                return this.thumbiconHeight;
-            }
-
-            set
-            {
-                this.thumbiconHeight = value;
+                this.thumbiconSize = value;
                 this.ReloadThumbicon();
             }
         }
@@ -117,19 +108,21 @@ namespace Thumbico
             // Try to get the thumbnail or icon from the Windows Shell
             try
             {
-                bool isIcon;
                 this.thumbiconPictureBox.Image = ShellThumbnail.GetThumbnail(
                     this.ThumbiconFileName,
-                    this.ThumbiconWidth,
-                    this.ThumbiconHeight,
+                    this.ThumbiconSize.Width,
+                    this.ThumbiconSize.Height,
                     this.ThumbiconFlags,
-                    out isIcon);
+                    out bool isIcon);
             }
             catch (FileNotFoundException e)
             {
                 MessageBox.Show(e.Message, "Error loading thumbnail or icon", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
+
+            bool haveImage = this.thumbiconPictureBox.Image != null;
+            this.sizeStatusBarPanel.Text = haveImage ? $"{this.thumbiconPictureBox.Image.Width} x {this.thumbiconPictureBox.Image.Height}" : string.Empty;
 
             // Because thumbnail bitmaps can be large, release the memory used by previous thumbnail managed bitmap
             if (oldThumbnail != null)
@@ -174,6 +167,26 @@ namespace Thumbico
             if (fileItems.Length > 0)
             {
                 this.ThumbiconFileName = fileItems[0];
+            }
+        }
+
+        private void ImageSizeMenuItem_Click(object sender, EventArgs e)
+        {
+            if (this.sizeForm.ShowDialog(this) == DialogResult.OK)
+            {
+                this.ThumbiconSize = new Size(
+                    (int)this.sizeForm.widthNumericUpDown.Value,
+                    (int)this.sizeForm.heightNumericUpDown.Value);
+            }
+        }
+
+        private void statusBar_PanelClick(object sender, StatusBarPanelClickEventArgs e)
+        {
+            switch (this.statusBar.Panels.IndexOf(e.StatusBarPanel))
+            {
+                case 1:
+                    this.imageSizeMenuItem.PerformClick();
+                    break;
             }
         }
     }
