@@ -226,14 +226,18 @@
             // 
             // MainForm
             // 
+            this.AllowDrop = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.Window;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.thumbiconPictureBox);
             this.Controls.Add(this.statusBar1);
             this.Menu = this.mainMenu1;
             this.Name = "MainForm";
             this.Text = "Thumbico";
+            this.DragDrop += new System.Windows.Forms.DragEventHandler(this.MainForm_DragDrop);
+            this.DragEnter += new System.Windows.Forms.DragEventHandler(this.MainForm_DragEnter);
             ((System.ComponentModel.ISupportInitialize)(this.thumbiconPictureBox)).EndInit();
             this.ResumeLayout(false);
 

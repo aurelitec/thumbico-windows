@@ -148,5 +148,33 @@ namespace Thumbico
                 this.ThumbiconFlags = senderMenuItem.Checked ? this.ThumbiconFlags | flag : this.ThumbiconFlags & ~flag;
             }
         }
+
+        // *************************************
+        // Drag and Drop
+        // *************************************
+
+        /// <summary>
+        /// Informs the system that the main form accepts drag and drop operations with file/folder items
+        /// </summary>
+        /// <param name="sender">The object where the event handler is attached.</param>
+        /// <param name="e">The event data.</param>
+        private void MainForm_DragEnter(object sender, DragEventArgs e)
+        {
+            e.Effect = e.Data.GetDataPresent(DataFormats.FileDrop) ? DragDropEffects.All : DragDropEffects.None;
+        }
+
+        /// <summary>
+        /// Gets the file/folder that was dragged and dropped on the main form and loads its thumbicon.
+        /// </summary>
+        /// <param name="sender">The object where the event handler is attached.</param>
+        /// <param name="e">The event data.</param>
+        private void MainForm_DragDrop(object sender, DragEventArgs e)
+        {
+            string[] fileItems = (string[])e.Data.GetData(DataFormats.FileDrop, false);
+            if (fileItems.Length > 0)
+            {
+                this.ThumbiconFileName = fileItems[0];
+            }
+        }
     }
 }
