@@ -33,14 +33,14 @@
             this.label2 = new System.Windows.Forms.Label();
             this.heightNumericUpDown = new System.Windows.Forms.NumericUpDown();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.cancelButton = new System.Windows.Forms.Button();
-            this.okButton = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.okButton = new System.Windows.Forms.Button();
+            this.cancelButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.widthNumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.heightNumericUpDown)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
@@ -65,7 +65,7 @@
             this.widthNumericUpDown.Size = new System.Drawing.Size(82, 20);
             this.widthNumericUpDown.TabIndex = 0;
             this.widthNumericUpDown.Value = new decimal(new int[] {
-            1,
+            256,
             0,
             0,
             0});
@@ -108,7 +108,7 @@
             this.heightNumericUpDown.Size = new System.Drawing.Size(82, 20);
             this.heightNumericUpDown.TabIndex = 3;
             this.heightNumericUpDown.Value = new decimal(new int[] {
-            1,
+            256,
             0,
             0,
             0});
@@ -140,6 +140,26 @@
             this.tableLayoutPanel1.Size = new System.Drawing.Size(221, 173);
             this.tableLayoutPanel1.TabIndex = 1;
             // 
+            // label6
+            // 
+            this.label6.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(157, 91);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(33, 13);
+            this.label6.TabIndex = 9;
+            this.label6.Text = "pixels";
+            // 
+            // label5
+            // 
+            this.label5.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(157, 52);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(33, 13);
+            this.label5.TabIndex = 8;
+            this.label5.Text = "pixels";
+            // 
             // label3
             // 
             this.label3.Anchor = System.Windows.Forms.AnchorStyles.Right;
@@ -160,34 +180,19 @@
             "16 x 16",
             "24 x 24",
             "32 x 32",
+            "48 x 48",
+            "64 x 64",
+            "96 x 96",
+            "128 x 128",
+            "192 x 192",
+            "256 x 256",
             "512 x 512",
-            "1024 x 1024"});
+            "1024 x 1024",
+            });
             this.comboBox1.Location = new System.Drawing.Point(69, 87);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(82, 21);
             this.comboBox1.TabIndex = 4;
-            // 
-            // cancelButton
-            // 
-            this.cancelButton.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.cancelButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.cancelButton.Location = new System.Drawing.Point(84, 3);
-            this.cancelButton.Name = "cancelButton";
-            this.cancelButton.Size = new System.Drawing.Size(75, 23);
-            this.cancelButton.TabIndex = 1;
-            this.cancelButton.Text = "Cancel";
-            this.cancelButton.UseVisualStyleBackColor = true;
-            // 
-            // okButton
-            // 
-            this.okButton.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.okButton.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.okButton.Location = new System.Drawing.Point(3, 3);
-            this.okButton.Name = "okButton";
-            this.okButton.Size = new System.Drawing.Size(75, 23);
-            this.okButton.TabIndex = 6;
-            this.okButton.Text = "OK";
-            this.okButton.UseVisualStyleBackColor = true;
             // 
             // label4
             // 
@@ -198,26 +203,6 @@
             this.label4.Size = new System.Drawing.Size(33, 13);
             this.label4.TabIndex = 7;
             this.label4.Text = "pixels";
-            // 
-            // label5
-            // 
-            this.label5.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(157, 52);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(33, 13);
-            this.label5.TabIndex = 8;
-            this.label5.Text = "pixels";
-            // 
-            // label6
-            // 
-            this.label6.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(157, 91);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(33, 13);
-            this.label6.TabIndex = 9;
-            this.label6.Text = "pixels";
             // 
             // flowLayoutPanel1
             // 
@@ -230,6 +215,28 @@
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.Size = new System.Drawing.Size(162, 29);
             this.flowLayoutPanel1.TabIndex = 10;
+            // 
+            // okButton
+            // 
+            this.okButton.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.okButton.DialogResult = System.Windows.Forms.DialogResult.OK;
+            this.okButton.Location = new System.Drawing.Point(3, 3);
+            this.okButton.Name = "okButton";
+            this.okButton.Size = new System.Drawing.Size(75, 23);
+            this.okButton.TabIndex = 6;
+            this.okButton.Text = "OK";
+            this.okButton.UseVisualStyleBackColor = true;
+            // 
+            // cancelButton
+            // 
+            this.cancelButton.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.cancelButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.cancelButton.Location = new System.Drawing.Point(84, 3);
+            this.cancelButton.Name = "cancelButton";
+            this.cancelButton.Size = new System.Drawing.Size(75, 23);
+            this.cancelButton.TabIndex = 1;
+            this.cancelButton.Text = "Cancel";
+            this.cancelButton.UseVisualStyleBackColor = true;
             // 
             // SizeForm
             // 

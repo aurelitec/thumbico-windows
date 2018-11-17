@@ -30,11 +30,13 @@
         {
             this.components = new System.ComponentModel.Container();
             this.mainMenu1 = new System.Windows.Forms.MainMenu(this.components);
-            this.menuItem1 = new System.Windows.Forms.MenuItem();
-            this.FileOpenMenuItem = new System.Windows.Forms.MenuItem();
+            this.fileMenuItem = new System.Windows.Forms.MenuItem();
+            this.fileOpenMenuItem = new System.Windows.Forms.MenuItem();
+            this.fileSaveAsMenuItem = new System.Windows.Forms.MenuItem();
             this.menuItem3 = new System.Windows.Forms.MenuItem();
-            this.menuItem4 = new System.Windows.Forms.MenuItem();
-            this.menuItem5 = new System.Windows.Forms.MenuItem();
+            this.fileExitMenuItem = new System.Windows.Forms.MenuItem();
+            this.editMenuItem = new System.Windows.Forms.MenuItem();
+            this.editCopyMenuItem = new System.Windows.Forms.MenuItem();
             this.menuItem6 = new System.Windows.Forms.MenuItem();
             this.imageSizeMenuItem = new System.Windows.Forms.MenuItem();
             this.menuItem2 = new System.Windows.Forms.MenuItem();
@@ -48,7 +50,8 @@
             this.imageWideThumbnailsMenuItem = new System.Windows.Forms.MenuItem();
             this.imageIconBackgroundMenuItem = new System.Windows.Forms.MenuItem();
             this.imageScaleUpMenuItem = new System.Windows.Forms.MenuItem();
-            this.menuItem7 = new System.Windows.Forms.MenuItem();
+            this.viewMenuItem = new System.Windows.Forms.MenuItem();
+            this.viewBackgroundColorMenuItem = new System.Windows.Forms.MenuItem();
             this.menuItem8 = new System.Windows.Forms.MenuItem();
             this.menuItem9 = new System.Windows.Forms.MenuItem();
             this.menuItem10 = new System.Windows.Forms.MenuItem();
@@ -56,54 +59,75 @@
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.statusBar = new System.Windows.Forms.StatusBar();
             this.statusBarPanel1 = new System.Windows.Forms.StatusBarPanel();
-            this.sizeStatusBarPanel = new System.Windows.Forms.StatusBarPanel();
+            this.desiredSizeStatusBarPanel = new System.Windows.Forms.StatusBarPanel();
+            this.actualSizeStatusBarPanel = new System.Windows.Forms.StatusBarPanel();
             this.thumbiconPictureBox = new System.Windows.Forms.PictureBox();
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.thumbiconPanel = new System.Windows.Forms.Panel();
+            this.colorDialog = new System.Windows.Forms.ColorDialog();
+            this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
             ((System.ComponentModel.ISupportInitialize)(this.statusBarPanel1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.sizeStatusBarPanel)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.desiredSizeStatusBarPanel)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.actualSizeStatusBarPanel)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.thumbiconPictureBox)).BeginInit();
-            this.panel1.SuspendLayout();
+            this.thumbiconPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // mainMenu1
             // 
             this.mainMenu1.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
-            this.menuItem1,
-            this.menuItem5,
+            this.fileMenuItem,
+            this.editMenuItem,
             this.menuItem6,
-            this.menuItem7,
+            this.viewMenuItem,
             this.menuItem8});
             // 
-            // menuItem1
+            // fileMenuItem
             // 
-            this.menuItem1.Index = 0;
-            this.menuItem1.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
-            this.FileOpenMenuItem,
+            this.fileMenuItem.Index = 0;
+            this.fileMenuItem.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
+            this.fileOpenMenuItem,
+            this.fileSaveAsMenuItem,
             this.menuItem3,
-            this.menuItem4});
-            this.menuItem1.Text = "&File";
+            this.fileExitMenuItem});
+            this.fileMenuItem.Text = "&File";
             // 
-            // FileOpenMenuItem
+            // fileOpenMenuItem
             // 
-            this.FileOpenMenuItem.Index = 0;
-            this.FileOpenMenuItem.Shortcut = System.Windows.Forms.Shortcut.CtrlO;
-            this.FileOpenMenuItem.Text = "&Open...";
-            this.FileOpenMenuItem.Click += new System.EventHandler(this.FileOpenMenuItem_Click);
+            this.fileOpenMenuItem.Index = 0;
+            this.fileOpenMenuItem.Shortcut = System.Windows.Forms.Shortcut.CtrlO;
+            this.fileOpenMenuItem.Text = "&Open...";
+            this.fileOpenMenuItem.Click += new System.EventHandler(this.FileOpenMenuItem_Click);
+            // 
+            // fileSaveAsMenuItem
+            // 
+            this.fileSaveAsMenuItem.Index = 1;
+            this.fileSaveAsMenuItem.Text = "Save &As...";
+            this.fileSaveAsMenuItem.Click += new System.EventHandler(this.FileSaveAsMenuItem_Click);
             // 
             // menuItem3
             // 
-            this.menuItem3.Index = 1;
+            this.menuItem3.Index = 2;
             this.menuItem3.Text = "-";
             // 
-            // menuItem4
+            // fileExitMenuItem
             // 
-            this.menuItem4.Index = 2;
-            this.menuItem4.Text = "E&xit";
+            this.fileExitMenuItem.Index = 3;
+            this.fileExitMenuItem.Text = "E&xit";
+            this.fileExitMenuItem.Click += new System.EventHandler(this.FileExitMenuItem_Click);
             // 
-            // menuItem5
+            // editMenuItem
             // 
-            this.menuItem5.Index = 1;
-            this.menuItem5.Text = "&Edit";
+            this.editMenuItem.Index = 1;
+            this.editMenuItem.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
+            this.editCopyMenuItem});
+            this.editMenuItem.Text = "&Edit";
+            // 
+            // editCopyMenuItem
+            // 
+            this.editCopyMenuItem.Index = 0;
+            this.editCopyMenuItem.Shortcut = System.Windows.Forms.Shortcut.CtrlC;
+            this.editCopyMenuItem.Text = "&Copy";
+            this.editCopyMenuItem.Click += new System.EventHandler(this.EditCopyMenuItem_Click);
             // 
             // menuItem6
             // 
@@ -195,10 +219,18 @@
             this.imageScaleUpMenuItem.Text = "Scale Up";
             this.imageScaleUpMenuItem.Click += new System.EventHandler(this.ImageFlagsMenuItems_Click);
             // 
-            // menuItem7
+            // viewMenuItem
             // 
-            this.menuItem7.Index = 3;
-            this.menuItem7.Text = "&View";
+            this.viewMenuItem.Index = 3;
+            this.viewMenuItem.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
+            this.viewBackgroundColorMenuItem});
+            this.viewMenuItem.Text = "&View";
+            // 
+            // viewBackgroundColorMenuItem
+            // 
+            this.viewBackgroundColorMenuItem.Index = 0;
+            this.viewBackgroundColorMenuItem.Text = "&Background Color...";
+            this.viewBackgroundColorMenuItem.Click += new System.EventHandler(this.ViewBackgroundColorMenuItem_Click);
             // 
             // menuItem8
             // 
@@ -234,24 +266,31 @@
             this.statusBar.Name = "statusBar";
             this.statusBar.Panels.AddRange(new System.Windows.Forms.StatusBarPanel[] {
             this.statusBarPanel1,
-            this.sizeStatusBarPanel});
+            this.desiredSizeStatusBarPanel,
+            this.actualSizeStatusBarPanel});
             this.statusBar.ShowPanels = true;
             this.statusBar.Size = new System.Drawing.Size(800, 22);
             this.statusBar.TabIndex = 0;
             this.statusBar.Text = "statusBar1";
-            this.statusBar.PanelClick += new System.Windows.Forms.StatusBarPanelClickEventHandler(this.statusBar_PanelClick);
+            this.statusBar.PanelClick += new System.Windows.Forms.StatusBarPanelClickEventHandler(this.StatusBar_PanelClick);
             // 
             // statusBarPanel1
             // 
             this.statusBarPanel1.AutoSize = System.Windows.Forms.StatusBarPanelAutoSize.Spring;
             this.statusBarPanel1.Name = "statusBarPanel1";
-            this.statusBarPanel1.Text = "statusBarPanel1";
-            this.statusBarPanel1.Width = 683;
+            this.statusBarPanel1.Width = 763;
             // 
-            // sizeStatusBarPanel
+            // desiredSizeStatusBarPanel
             // 
-            this.sizeStatusBarPanel.Name = "sizeStatusBarPanel";
-            this.sizeStatusBarPanel.Text = "statusBarPanel2";
+            this.desiredSizeStatusBarPanel.AutoSize = System.Windows.Forms.StatusBarPanelAutoSize.Contents;
+            this.desiredSizeStatusBarPanel.Name = "desiredSizeStatusBarPanel";
+            this.desiredSizeStatusBarPanel.Width = 10;
+            // 
+            // actualSizeStatusBarPanel
+            // 
+            this.actualSizeStatusBarPanel.AutoSize = System.Windows.Forms.StatusBarPanelAutoSize.Contents;
+            this.actualSizeStatusBarPanel.Name = "actualSizeStatusBarPanel";
+            this.actualSizeStatusBarPanel.Width = 10;
             // 
             // thumbiconPictureBox
             // 
@@ -262,15 +301,19 @@
             this.thumbiconPictureBox.TabIndex = 1;
             this.thumbiconPictureBox.TabStop = false;
             // 
-            // panel1
+            // thumbiconPanel
             // 
-            this.panel1.AutoScroll = true;
-            this.panel1.Controls.Add(this.thumbiconPictureBox);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(800, 428);
-            this.panel1.TabIndex = 2;
+            this.thumbiconPanel.AutoScroll = true;
+            this.thumbiconPanel.Controls.Add(this.thumbiconPictureBox);
+            this.thumbiconPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.thumbiconPanel.Location = new System.Drawing.Point(0, 0);
+            this.thumbiconPanel.Name = "thumbiconPanel";
+            this.thumbiconPanel.Size = new System.Drawing.Size(800, 428);
+            this.thumbiconPanel.TabIndex = 2;
+            // 
+            // saveFileDialog
+            // 
+            this.saveFileDialog.Filter = "Bitmap (*.bmp)|*.bmp|GIF (*.gif)|*.gif|JPEG (*.jpg)|*.jpg|PNG (*.png)|*.png";
             // 
             // MainForm
             // 
@@ -279,18 +322,20 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Window;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.thumbiconPanel);
             this.Controls.Add(this.statusBar);
             this.Menu = this.mainMenu1;
             this.Name = "MainForm";
             this.Text = "Thumbico";
             this.DragDrop += new System.Windows.Forms.DragEventHandler(this.MainForm_DragDrop);
             this.DragEnter += new System.Windows.Forms.DragEventHandler(this.MainForm_DragEnter);
+            this.Resize += new System.EventHandler(this.MainForm_Resize);
             ((System.ComponentModel.ISupportInitialize)(this.statusBarPanel1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.sizeStatusBarPanel)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.desiredSizeStatusBarPanel)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.actualSizeStatusBarPanel)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.thumbiconPictureBox)).EndInit();
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
+            this.thumbiconPanel.ResumeLayout(false);
+            this.thumbiconPanel.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -298,13 +343,13 @@
         #endregion
 
         private System.Windows.Forms.MainMenu mainMenu1;
-        private System.Windows.Forms.MenuItem menuItem1;
-        private System.Windows.Forms.MenuItem FileOpenMenuItem;
+        private System.Windows.Forms.MenuItem fileMenuItem;
+        private System.Windows.Forms.MenuItem fileOpenMenuItem;
         private System.Windows.Forms.MenuItem menuItem3;
-        private System.Windows.Forms.MenuItem menuItem4;
-        private System.Windows.Forms.MenuItem menuItem5;
+        private System.Windows.Forms.MenuItem fileExitMenuItem;
+        private System.Windows.Forms.MenuItem editMenuItem;
         private System.Windows.Forms.MenuItem menuItem6;
-        private System.Windows.Forms.MenuItem menuItem7;
+        private System.Windows.Forms.MenuItem viewMenuItem;
         private System.Windows.Forms.MenuItem menuItem8;
         private System.Windows.Forms.MenuItem menuItem9;
         private System.Windows.Forms.MenuItem menuItem10;
@@ -323,10 +368,16 @@
         private System.Windows.Forms.StatusBar statusBar;
         private System.Windows.Forms.PictureBox thumbiconPictureBox;
         private System.Windows.Forms.StatusBarPanel statusBarPanel1;
-        private System.Windows.Forms.StatusBarPanel sizeStatusBarPanel;
+        private System.Windows.Forms.StatusBarPanel actualSizeStatusBarPanel;
         private System.Windows.Forms.MenuItem imageSizeMenuItem;
         private System.Windows.Forms.MenuItem menuItem2;
-        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel thumbiconPanel;
+        private System.Windows.Forms.MenuItem editCopyMenuItem;
+        private System.Windows.Forms.MenuItem viewBackgroundColorMenuItem;
+        private System.Windows.Forms.ColorDialog colorDialog;
+        private System.Windows.Forms.StatusBarPanel desiredSizeStatusBarPanel;
+        private System.Windows.Forms.MenuItem fileSaveAsMenuItem;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog;
     }
 }
 
