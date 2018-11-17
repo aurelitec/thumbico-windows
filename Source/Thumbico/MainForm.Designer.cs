@@ -37,6 +37,7 @@
             this.fileExitMenuItem = new System.Windows.Forms.MenuItem();
             this.editMenuItem = new System.Windows.Forms.MenuItem();
             this.editCopyMenuItem = new System.Windows.Forms.MenuItem();
+            this.editCopyImageAsPNGMenuItem = new System.Windows.Forms.MenuItem();
             this.menuItem6 = new System.Windows.Forms.MenuItem();
             this.imageSizeMenuItem = new System.Windows.Forms.MenuItem();
             this.menuItem2 = new System.Windows.Forms.MenuItem();
@@ -119,15 +120,22 @@
             // 
             this.editMenuItem.Index = 1;
             this.editMenuItem.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
-            this.editCopyMenuItem});
+            this.editCopyMenuItem,
+            this.editCopyImageAsPNGMenuItem});
             this.editMenuItem.Text = "&Edit";
             // 
             // editCopyMenuItem
             // 
             this.editCopyMenuItem.Index = 0;
             this.editCopyMenuItem.Shortcut = System.Windows.Forms.Shortcut.CtrlC;
-            this.editCopyMenuItem.Text = "&Copy";
+            this.editCopyMenuItem.Text = "&Copy Image";
             this.editCopyMenuItem.Click += new System.EventHandler(this.EditCopyMenuItem_Click);
+            // 
+            // editCopyImageAsPNGMenuItem
+            // 
+            this.editCopyImageAsPNGMenuItem.Index = 1;
+            this.editCopyImageAsPNGMenuItem.Text = "Copy Image As PNG";
+            this.editCopyImageAsPNGMenuItem.Click += new System.EventHandler(this.EditCopyImageAsPNGMenuItem_Click);
             // 
             // menuItem6
             // 
@@ -294,6 +302,7 @@
             // 
             // thumbiconPictureBox
             // 
+            this.thumbiconPictureBox.BackColor = System.Drawing.Color.Transparent;
             this.thumbiconPictureBox.Location = new System.Drawing.Point(0, 0);
             this.thumbiconPictureBox.Name = "thumbiconPictureBox";
             this.thumbiconPictureBox.Size = new System.Drawing.Size(256, 256);
@@ -378,6 +387,7 @@
         private System.Windows.Forms.StatusBarPanel desiredSizeStatusBarPanel;
         private System.Windows.Forms.MenuItem fileSaveAsMenuItem;
         private System.Windows.Forms.SaveFileDialog saveFileDialog;
+        private System.Windows.Forms.MenuItem editCopyImageAsPNGMenuItem;
     }
 }
 

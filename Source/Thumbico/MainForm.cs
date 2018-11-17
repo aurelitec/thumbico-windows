@@ -222,7 +222,7 @@ namespace Thumbico
         /// <param name="e">The event data.</param>
         private void FileOpenMenuItem_Click(object sender, EventArgs e)
         {
-            if (this.openFileDialog.ShowDialog() == DialogResult.OK)
+            if (this.openFileDialog.ShowDialog(this) == DialogResult.OK)
             {
                 this.ThumbiconFileName = this.openFileDialog.FileName;
             }
@@ -275,16 +275,38 @@ namespace Thumbico
         }
 
         /// <summary>
+        /// Copies the current thumbicon image to clipboard in PNG clipboard data format.
+        /// </summary>
+        /// <param name="sender">The object where the event handler is attached.</param>
+        /// <param name="e">The event data.</param>
+        private void EditCopyImageAsPNGMenuItem_Click(object sender, EventArgs e)
+        {
+            if (this.thumbiconPictureBox.Image != null)
+            {
+                using (MemoryStream stream = new MemoryStream())
+                {
+                    this.thumbiconPictureBox.Image.Save(stream, ImageFormat.Png);
+                    var data = new DataObject("PNG", stream);
+                    Clipboard.Clear();
+                    Clipboard.SetDataObject(data, true);
+                }
+            }
+        }
+
+        // *************************************
+        // View Menu Event Handlers
+        // *************************************
+
+        /// <summary>
         /// Runs the Color common dialog box and lets the user change the background color.
         /// </summary>
         /// <param name="sender">The object where the event handler is attached.</param>
         /// <param name="e">The event data.</param>
         private void ViewBackgroundColorMenuItem_Click(object sender, EventArgs e)
         {
-            // this.colorDialog.Color = this.thumbPictureBox.BackColor;
-            if (this.colorDialog.ShowDialog() == DialogResult.OK)
+            this.colorDialog.Color = this.thumbiconPanel.BackColor;
+            if (this.colorDialog.ShowDialog(this) == DialogResult.OK)
             {
-                // this.thumbPanel.BackColor = this.thumbPictureBox.BackColor = this.colorDialog.Color;
                 this.thumbiconPanel.BackColor = this.colorDialog.Color;
             }
         }
