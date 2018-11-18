@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.mainMenu1 = new System.Windows.Forms.MainMenu(this.components);
+            this.mainMenu = new System.Windows.Forms.MainMenu(this.components);
             this.fileMenuItem = new System.Windows.Forms.MenuItem();
             this.fileOpenMenuItem = new System.Windows.Forms.MenuItem();
             this.fileSaveAsMenuItem = new System.Windows.Forms.MenuItem();
@@ -53,6 +53,7 @@
             this.imageScaleUpMenuItem = new System.Windows.Forms.MenuItem();
             this.viewMenuItem = new System.Windows.Forms.MenuItem();
             this.viewBackgroundColorMenuItem = new System.Windows.Forms.MenuItem();
+            this.ViewFullscreenMenuItem = new System.Windows.Forms.MenuItem();
             this.menuItem8 = new System.Windows.Forms.MenuItem();
             this.menuItem9 = new System.Windows.Forms.MenuItem();
             this.menuItem10 = new System.Windows.Forms.MenuItem();
@@ -73,9 +74,9 @@
             this.thumbiconPanel.SuspendLayout();
             this.SuspendLayout();
             // 
-            // mainMenu1
+            // mainMenu
             // 
-            this.mainMenu1.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
+            this.mainMenu.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
             this.fileMenuItem,
             this.editMenuItem,
             this.menuItem6,
@@ -231,7 +232,8 @@
             // 
             this.viewMenuItem.Index = 3;
             this.viewMenuItem.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
-            this.viewBackgroundColorMenuItem});
+            this.viewBackgroundColorMenuItem,
+            this.ViewFullscreenMenuItem});
             this.viewMenuItem.Text = "&View";
             // 
             // viewBackgroundColorMenuItem
@@ -239,6 +241,13 @@
             this.viewBackgroundColorMenuItem.Index = 0;
             this.viewBackgroundColorMenuItem.Text = "&Background Color...";
             this.viewBackgroundColorMenuItem.Click += new System.EventHandler(this.ViewBackgroundColorMenuItem_Click);
+            // 
+            // ViewFullscreenMenuItem
+            // 
+            this.ViewFullscreenMenuItem.Index = 1;
+            this.ViewFullscreenMenuItem.Shortcut = System.Windows.Forms.Shortcut.F11;
+            this.ViewFullscreenMenuItem.Text = "&Fullscreen";
+            this.ViewFullscreenMenuItem.Click += new System.EventHandler(this.ViewFullscreenMenuItem_Click);
             // 
             // menuItem8
             // 
@@ -291,14 +300,14 @@
             // desiredSizeStatusBarPanel
             // 
             this.desiredSizeStatusBarPanel.AutoSize = System.Windows.Forms.StatusBarPanelAutoSize.Contents;
+            this.desiredSizeStatusBarPanel.MinWidth = 100;
             this.desiredSizeStatusBarPanel.Name = "desiredSizeStatusBarPanel";
-            this.desiredSizeStatusBarPanel.Width = 10;
             // 
             // actualSizeStatusBarPanel
             // 
             this.actualSizeStatusBarPanel.AutoSize = System.Windows.Forms.StatusBarPanelAutoSize.Contents;
+            this.actualSizeStatusBarPanel.MinWidth = 100;
             this.actualSizeStatusBarPanel.Name = "actualSizeStatusBarPanel";
-            this.actualSizeStatusBarPanel.Width = 10;
             // 
             // thumbiconPictureBox
             // 
@@ -313,6 +322,7 @@
             // thumbiconPanel
             // 
             this.thumbiconPanel.AutoScroll = true;
+            this.thumbiconPanel.BackColor = System.Drawing.SystemColors.Window;
             this.thumbiconPanel.Controls.Add(this.thumbiconPictureBox);
             this.thumbiconPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.thumbiconPanel.Location = new System.Drawing.Point(0, 0);
@@ -333,11 +343,13 @@
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.thumbiconPanel);
             this.Controls.Add(this.statusBar);
-            this.Menu = this.mainMenu1;
+            this.KeyPreview = true;
+            this.Menu = this.mainMenu;
             this.Name = "MainForm";
             this.Text = "Thumbico";
             this.DragDrop += new System.Windows.Forms.DragEventHandler(this.MainForm_DragDrop);
             this.DragEnter += new System.Windows.Forms.DragEventHandler(this.MainForm_DragEnter);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.MainForm_KeyDown);
             this.Resize += new System.EventHandler(this.MainForm_Resize);
             ((System.ComponentModel.ISupportInitialize)(this.statusBarPanel1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.desiredSizeStatusBarPanel)).EndInit();
@@ -351,7 +363,7 @@
 
         #endregion
 
-        private System.Windows.Forms.MainMenu mainMenu1;
+        private System.Windows.Forms.MainMenu mainMenu;
         private System.Windows.Forms.MenuItem fileMenuItem;
         private System.Windows.Forms.MenuItem fileOpenMenuItem;
         private System.Windows.Forms.MenuItem menuItem3;
@@ -388,6 +400,7 @@
         private System.Windows.Forms.MenuItem fileSaveAsMenuItem;
         private System.Windows.Forms.SaveFileDialog saveFileDialog;
         private System.Windows.Forms.MenuItem editCopyImageAsPNGMenuItem;
+        private System.Windows.Forms.MenuItem ViewFullscreenMenuItem;
     }
 }
 

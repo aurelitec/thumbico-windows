@@ -19,6 +19,7 @@ namespace Thumbico
         private string thumbiconFileName;
         private Size thumbiconSize = new Size(256, 256);
         private ThumbnailFlags thumbiconFlags;
+        private bool fullScreen;
 
         private SizeForm sizeForm;
 
@@ -45,6 +46,8 @@ namespace Thumbico
             this.imageScaleUpMenuItem.Tag = ThumbnailFlags.ScaleUp;
 
             this.sizeForm = new SizeForm();
+
+            this.Text = $"{Application.ProductName} {Application.ProductVersion}";
         }
 
         private string ThumbiconFileName
@@ -87,6 +90,23 @@ namespace Thumbico
             {
                 this.thumbiconFlags = value;
                 this.ReloadThumbicon();
+            }
+        }
+
+        private bool FullScreen
+        {
+            get
+            {
+                return this.fullScreen;
+            }
+
+            set
+            {
+                this.fullScreen = value;
+                this.statusBar.Visible = !this.fullScreen;
+                this.Menu = this.fullScreen ? null : this.mainMenu;
+                this.FormBorderStyle = this.fullScreen ? FormBorderStyle.None : FormBorderStyle.Sizable;
+                this.WindowState = this.fullScreen ? FormWindowState.Maximized : FormWindowState.Normal;
             }
         }
 
@@ -308,6 +328,36 @@ namespace Thumbico
             if (this.colorDialog.ShowDialog(this) == DialogResult.OK)
             {
                 this.thumbiconPanel.BackColor = this.colorDialog.Color;
+            }
+        }
+
+        /// <summary>
+        /// Enter fullscreen.
+        /// </summary>
+        /// <param name="sender">The object where the event handler is attached.</param>
+        /// <param name="e">The event data.</param>
+        private void ViewFullscreenMenuItem_Click(object sender, EventArgs e)
+        {
+            this.FullScreen = !this.FullScreen;
+        }
+
+        // ********************************************************************
+        // Events - Keyboard
+        // ********************************************************************
+
+        /// <summary>
+        /// Handle key pressing.
+        /// </summary>
+        /// <param name="sender">The object where the event handler is attached.</param>
+        /// <param name="e">The event data.</param>
+        private void MainForm_KeyDown(object sender, KeyEventArgs e)
+        {
+            switch (e.KeyCode)
+            {
+                case Keys.F11:
+                    this.FullScreen = !this.FullScreen;
+                    e.SuppressKeyPress = true;
+                    break;
             }
         }
     }
